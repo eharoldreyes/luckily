@@ -10,28 +10,26 @@ import com.eharoldreyes.freelancemovies.R
 import com.eharoldreyes.freelancemovies.base.BaseActivity
 import com.eharoldreyes.freelancemovies.databinding.ActivityMovieBinding
 import com.eharoldreyes.freelancemovies.model.Movie
+import kotlinx.android.synthetic.main.activity_movie.*
 
-/**
- * Activity displaying the list of posts
- */
 class MovieActivity : BaseActivity<MoviePresenter>(), MovieView {
-    /**
-     * DataBinding instance
-     */
+
     private lateinit var binding: ActivityMovieBinding
 
-    /**
-     * The adapter for the list of posts
-     */
-    private val postsAdapter = MovieAdapter(this)
+    private val moviesAdapter = MovieAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
-        binding.adapter = postsAdapter
-        binding.layoutManager = LinearLayoutManager(this)
-        binding.dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+
+        movies_list.adapter = moviesAdapter
+        movies_list.layoutManager = LinearLayoutManager(this)
+        movies_list.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+
+//        binding.adapter = moviesAdapter
+//        binding.layoutManager = LinearLayoutManager(this)
+//        binding.dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
 
         presenter.onViewCreated()
     }
@@ -41,8 +39,8 @@ class MovieActivity : BaseActivity<MoviePresenter>(), MovieView {
         presenter.onViewDestroyed()
     }
 
-    override fun updatePosts(movies: List<Movie>) {
-        postsAdapter.updatePosts(movies)
+    override fun updateMovies(movies: List<Movie>) {
+        moviesAdapter.updateMovies(movies)
     }
 
     override fun showError(error: String) {

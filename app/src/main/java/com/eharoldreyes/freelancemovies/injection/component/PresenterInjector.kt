@@ -9,16 +9,10 @@ import com.eharoldreyes.freelancemovies.ui.movies.MoviePresenter
 import javax.inject.Singleton
 
 
-/**
- * Component providing inject() methods for presenters.
- */
 @Singleton
 @Component(modules = [(ContextModule::class), (NetworkModule::class)])
 interface PresenterInjector {
-    /**
-     * Injects required dependencies into the specified MoviePresenter.
-     * @param moviePresenter MoviePresenter in which to inject the dependencies
-     */
+
     fun inject(moviePresenter: MoviePresenter)
 
     @Component.Builder
