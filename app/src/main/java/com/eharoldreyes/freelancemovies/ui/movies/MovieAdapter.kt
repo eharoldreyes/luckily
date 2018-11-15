@@ -47,7 +47,7 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
 
         fun bind(movie: Movie) {
             view.title.text = movie.title
-            view.ratingBar.rating = movie.vote_average
+            view.ratingBar.rating = movie.vote_average / 2
 
 
             val posterURI = IMAGE_BASE_URL + movie.poster_path
