@@ -11,8 +11,14 @@ import com.eharoldreyes.freelancemovies.base.BaseActivity
 import com.eharoldreyes.freelancemovies.model.Movie
 import kotlinx.android.synthetic.main.activity_movie.*
 
+/**
+ * Activity displaying the list of movies
+ */
 class MovieActivity : BaseActivity<MoviePresenter>(), MovieView {
 
+    /**
+     * The adapter for the list of movies
+     */
     private val moviesAdapter = MovieAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {

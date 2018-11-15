@@ -11,10 +11,18 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+/**
+ * Module which provides all required dependencies about Context
+ */
 @Module
 @Suppress("unused")
 object NetworkModule {
 
+    /**
+     * Provides the API service implementation.
+     * @param retrofit the Retrofit object used to instantiate the service
+     * @return the API service implementation.
+     */
     @Provides
     @Reusable
     @JvmStatic
@@ -22,6 +30,10 @@ object NetworkModule {
         return retrofit.create(ApiService::class.java)
     }
 
+    /**
+     * Provides the Retrofit object.
+     * @return the Retrofit object
+     */
     @Provides
     @Reusable
     @JvmStatic

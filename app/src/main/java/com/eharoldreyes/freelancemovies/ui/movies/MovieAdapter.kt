@@ -10,8 +10,15 @@ import com.eharoldreyes.freelancemovies.R
 import com.eharoldreyes.freelancemovies.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
+/**
+ * Adapter for the list of the movies
+ * @property context Context in which the application is running
+ */
 class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
+    /**
+     * The list of movies of the adapter
+     */
     private var movies: List<Movie> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -26,6 +33,10 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
         holder.bind(movies[position])
     }
 
+    /**
+     * Updates the list of movies of the adapter
+     * @param movies the new list of posts of the adapter
+     */
     fun updateMovies(movies: List<Movie>) {
         this.movies = movies
         notifyDataSetChanged()
