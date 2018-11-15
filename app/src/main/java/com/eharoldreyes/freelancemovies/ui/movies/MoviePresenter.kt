@@ -21,14 +21,17 @@ class MoviePresenter(movieView: MovieView) : BasePresenter<MovieView>(movieView)
 
     private fun loadMovies() {
         view.showLoading()
-        subscription = apiService
-            .getMovies()
+        subscription = apiService.getTrendingMovies()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .doOnTerminate { view.hideLoading() }
             .subscribe(
-                { postList -> view.updateMovies(postList) },
-                { view.showError(R.string.unknown_error) }
+                {
+                    view.updateMovies(it.results)
+                },
+                {
+                    view.showError(R.string.unknown_error)
+                }
             )
     }
 

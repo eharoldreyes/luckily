@@ -1,6 +1,8 @@
 package com.eharoldreyes.freelancemovies.injection.module
 
+import com.eharoldreyes.freelancemovies.BuildConfig
 import com.eharoldreyes.freelancemovies.network.ApiService
+import com.eharoldreyes.freelancemovies.network.SelfSignedOkHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -25,9 +27,10 @@ object NetworkModule {
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .client(SelfSignedOkHttpClient.create())
             .build()
     }
 }

@@ -1,22 +1,21 @@
 package com.eharoldreyes.freelancemovies.ui.movies
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.eharoldreyes.freelancemovies.R
-import com.eharoldreyes.freelancemovies.databinding.ItemMovieBinding
 import com.eharoldreyes.freelancemovies.model.Movie
+import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var movies: List<Movie> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val layoutInflater = LayoutInflater.from(context)
-        val binding: ItemMovieBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_movie, parent, false)
-        return MovieViewHolder(binding)
+        return MovieViewHolder(context, LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -32,11 +31,15 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MovieViewHolder(private val context: Context, private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(movie: Movie) {
-            binding.movie = movie
-            binding.executePendingBindings()
+            view.title.text = movie.title
+            view.body.text = movie.vote_count.toString()
+            val posterURI = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.poster_path
+            Glide.with(context)
+                .load(posterURI)
+                .into(view.poster)
         }
     }
 }
